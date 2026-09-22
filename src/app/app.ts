@@ -9,7 +9,7 @@ const assignmentNum = "2";
 @Component({
   imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  styleUrl: './app.scss',
   templateUrl: './app.html',
 
 })
