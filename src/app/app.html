@@ -7,10 +7,30 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<div class="container">
+  <h3>Countries</h3>
+  @for (country of countryList; track country.population){
+    <div class="countryList">
+      <b>{{country.name}}</b>
+      <p>Population: {{country.population}}</p>
+      <p>Independent: {{country.independent}}</p>
+      <!--Checks if the country variable exists  -->
+      @if (country.borders) {
+        <h3>Bordering Countries</h3>
+        <div class = borderList>
 
-<h1>Assignment1</h1>
-<h2>Assignment {{assignmentNum}}</h2>
-<h2>Name: {{name}}</h2>
+        @for (string of country.borders; track $index) {
+          <p>{{string}}</p>
+        } @empty {
+          <p>No bordering countries found!</p>
+        }
+        </div>
+      }
+
+
+    </div>
+  }
+</div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
