@@ -7,10 +7,24 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-
-<h1>Assignment1</h1>
-<h2>Assignment {{assignmentNum}}</h2>
-<h2>Name: {{name}}</h2>
+<div class="container">
+  <h3>Countries</h3>\
+  @for (country of countryList; track country.population){
+    <div class="Country">
+      <b>{{country.name}}</b>
+      <p>{{country.population}}</p>
+      <p>{{country.independent}}</p>
+      <!--Checks if the country variable exists  -->
+      @if (country.borders) {
+        <div class = borderList>
+        @for (string of country.borders; track $index) {
+          <p>{{string}}</p>
+        }
+        </div>
+      }
+    </div>
+  }
+</div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
