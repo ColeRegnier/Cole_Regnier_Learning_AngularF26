@@ -12,16 +12,22 @@
   @for (country of countryList; track country.population){
     <div class="countryList">
       <b>{{country.name}}</b>
-      <p>{{country.population}}</p>
-      <p>{{country.independent}}</p>
+      <p>Population: {{country.population}}</p>
+      <p>Independent: {{country.independent}}</p>
       <!--Checks if the country variable exists  -->
       @if (country.borders) {
+        <h3>Bordering Countries</h3>
         <div class = borderList>
+
         @for (string of country.borders; track $index) {
           <p>{{string}}</p>
+        } @empty {
+          <p>No bordering countries found!</p>
         }
         </div>
       }
+
+
     </div>
   }
 </div>

@@ -1,21 +1,29 @@
+
 .container{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  border: 1em solid blueviolet ;
+  flex-direction: column;
+  height: auto;
+
+  padding: 2em;
+  gap: 20px;
 }
 .countryList{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
   flex-direction: column;
+  border: 0.2em solid blueviolet;
+
+  padding: 1em;
 }
 .borderList {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
+  height: 10vh;
   flex-direction: row;
+  gap: 20px;
 }
