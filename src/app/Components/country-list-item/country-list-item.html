@@ -1,0 +1,13 @@
+<h1>{{country().name}}</h1>
+<h2>{{country().population}}</h2>
+<!--checking if borders has a length if it doesnt then dont display borders (island nations)-->
+@if (country().borders?.length) {
+  <h3>Bordering countries of {{country.name}}</h3>
+  <ul>
+    @for (border of country().borders; track border) {
+      <li>{{border}}</li>
+    }
+
+  </ul>
+
+}

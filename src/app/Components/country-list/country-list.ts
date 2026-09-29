@@ -1,21 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {Brewery} from './Shared/Models/brewery';
-import {Country} from './Shared/Models/country';
-import { count } from 'rxjs';
-import { CountryList } from './Components/country-list/country-list';
+import { Component } from '@angular/core';
+import { Country } from '../../Shared/Models/country';
 
-const name = "Cole";
-const assignmentNum = "2";
 @Component({
-  imports: [RouterOutlet, CountryList],
-  selector: 'app-root',
-  styleUrl: './app.scss',
-  templateUrl: './app.html',
+  imports: [],
+  selector: 'app-country-list',
+  styleUrl: './country-list.css',
+  templateUrl: './country-list.html',
 })
-export class App {
-  protected readonly title = signal('Assignment 2');
-  protected countryList: Country[] = [
+export class CountryList {
+  countryList: Country[] = [
     {
       name: 'Canada',
       population: 41417056,
@@ -55,8 +48,4 @@ export class App {
     { name: 'South Korea', population: 51106229, independent: true, borders: ['North Korea'] },
     { name: 'French Polynesia', population: 2787861, independent: false },
   ];
-
-  protected readonly assignmentNum = assignmentNum;
-  protected readonly name = name;
-  protected readonly count = count;
 }
