@@ -2,12 +2,17 @@
 <h2>{{country().population}}</h2>
 <!--checking if borders has a length if it doesnt then dont display borders (island nations)-->
 @if (country().borders?.length) {
-  <h3>Bordering countries of {{country.name}}</h3>
+  <h3>Bordering countries of {{country().name}}</h3>
   <ul>
     @for (border of country().borders; track border) {
       <li>{{border}}</li>
     }
 
   </ul>
+
+}
+@switch (country().independent){
+  @case (true){<span (click) ="deny(); $event.stopPropagation()">This country is independent</span>}
+  @case (false){<span (click) = "accept(); $event.stopPropagation()">This country is not independent</span>}
 
 }

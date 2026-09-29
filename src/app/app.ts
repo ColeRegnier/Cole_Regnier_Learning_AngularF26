@@ -14,7 +14,7 @@ const assignmentNum = "2";
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Assignment 2');
+
   protected countryList: Country[] = [
     {
       name: 'Canada',
@@ -56,7 +56,5 @@ export class App {
     { name: 'French Polynesia', population: 2787861, independent: false },
   ];
 
-  protected readonly assignmentNum = assignmentNum;
-  protected readonly name = name;
-  protected readonly count = count;
+
 }
