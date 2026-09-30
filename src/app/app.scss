@@ -21,6 +21,16 @@ $boxColor: #8A2BE2FF;
 
   padding: 1em;
 }
+.country-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60em;
+  flex-direction: column;
+  border: 0.2em solid $boxColor;
+
+  padding: 1em;
+}
 .borderList {
   display: flex;
   justify-content: center;

@@ -1,0 +1,20 @@
+.country-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60em;
+  flex-direction: column;
+  border: 0.2em solid blue;
+
+  padding: 1em;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+
+  padding: 2em;
+  gap: 20px;
+}

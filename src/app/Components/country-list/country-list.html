@@ -1,6 +1,6 @@
 <h1>List of Countries!</h1>
 
-<div class =  "country-list">
+<div class =  "container">
   @for (country of countryList; track country.name){
     <!--Passing parent property "country" into child country-list-item as [country] -->
     <app-country-list-item [country]="country"
