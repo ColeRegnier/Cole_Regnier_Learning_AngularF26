@@ -1,3 +1,6 @@
+<div class = "country-list">
+
+
 <h1>{{country().name}}</h1>
 <h2>{{country().population}}</h2>
 <!--checking if borders has a length if it doesnt then dont display borders (island nations)-->
@@ -16,3 +19,4 @@
   @case (false){<span (click) = "accept(); $event.stopPropagation()">This country is not independent</span>}
 
 }
+</div>
