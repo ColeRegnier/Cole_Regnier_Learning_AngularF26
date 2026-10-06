@@ -1,7 +1,7 @@
 <h1>List of Countries!</h1>
 
 <div class =  "container">
-  @for (country of countryList; track country.name){
+  @for (country of countryList(); track country.name){
     <!--Passing parent property "country" into child country-list-item as [country] -->
     <app-country-list-item [country]="country"
     (ContentEvent)="onContentEvent($event)">
