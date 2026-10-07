@@ -3,4 +3,5 @@ export interface Country {
   population: string | number;
   independent: boolean;
   borders?: string[]; // list of bordering countries
+
 }
