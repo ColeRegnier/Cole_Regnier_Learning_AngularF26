@@ -12,12 +12,17 @@ import { CountryService} from '../../Services/country';
 export class CountryList {
   private countryService= inject(CountryService);
   protected countryList = this.countryService.countryList;
+  protected countriesSorted = this.countryService.secondComputed;
 
   protected onContentEvent($event: ContentEvent) {
+    console.log('=== $event: ' + $event +' ===');
     if ($event.action==='accept-independence'){
       console.log('Accept Independence');
     }else if ($event.action==='deny-independence'){
       console.log('Deny Independence');
+    } else if ($event.action==='select'){
+        console.log('Selected:',$event.name);
+        this.countryService.removeCountry($event.name)
     }
   }
 }

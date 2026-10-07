@@ -1,4 +1,4 @@
 export interface ContentEvent {
   name: string;
-  action: 'accept-independence' | 'deny-independence';
+  action: 'accept-independence' | 'deny-independence' | 'select';
 }

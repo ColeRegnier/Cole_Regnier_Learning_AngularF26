@@ -14,6 +14,11 @@ export class CountryListItem {
   // parent must pass country to this class
   country = input.required<Country>();
   ContentEvent = output<ContentEvent>();
+
+  onClick(){
+    console.log('=== onClick event ===');
+    this.ContentEvent.emit({name :this.country().name, action : 'select'})
+  }
   accept():void{
     // emitting accepted independence of parent country
     this.ContentEvent.emit({ name: this.country().name, action: 'accept-independence' });
