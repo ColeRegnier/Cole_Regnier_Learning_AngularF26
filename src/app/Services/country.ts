@@ -1,8 +1,11 @@
-import { computed, effect, Service, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, Service, signal } from '@angular/core';
 import { ContentEvent } from '../Shared/Models/content-event';
 import { Country } from '../Shared/Models/country';
+import { COUNTRY_CONFIG } from '../Shared/country-config';
 @Service()
+@Injectable({ providedIn: 'root' })
 export class CountryService {
+  private config = inject(COUNTRY_CONFIG);
   private countries = signal<Country[]>([
     {
       name: 'Canada',
@@ -40,43 +43,44 @@ export class CountryService {
       independent: true,
       borders: ['Algeria', 'Chad', 'Egypt', 'Niger', 'Sudan', 'Tunisia'],
     },
-    { name: 'South Korea',
-      population: 51106229,
-      independent: true,
-      borders: ['North Korea']},
+    { name: 'South Korea', population: 51106229, independent: true, borders: ['North Korea'] },
 
-    { name: 'French Polynesia',
-      population: 2787861,
-      independent: false },
+    { name: 'French Polynesia', population: 2787861, independent: false },
   ]);
 
   // effect
-  constructor(){
+  constructor() {
     console.log('CountryService constructor');
-    effect(() => { console.log('===Total number of countries ' + this.countries().length +'===');
+    effect(() => {
+      console.log('===Total number of countries ' + this.countries().length + '===');
     });
   }
 
   countryList = this.countries.asReadonly();
   // computed signal function uses filter on array. filter function returns all country objects to the contries Country[] array that are not undefined
-  countryWithBorders = computed(()=>this.countries().filter(country => country.borders !== undefined));
+  countryWithBorders = computed(() =>
+    this.countries().filter((country) => country.borders !== undefined),
+  );
   // spread makes a copy of the array so its safe to use sort on it. sorts the array by countries with the most borders first and least with last
-  secondComputed =computed(()=>[...this.countryWithBorders()].sort((a,b) =>
-  { if (a.borders && b.borders){
-    if (a.borders.length < b.borders.length) return 1;
-    else if (a.borders.length > b.borders.length) return -1;
-    else return 0;
-  }else {
-    return 0;
-  }
-  }));
+  secondComputed = computed(() =>
+    [...this.countryWithBorders()].sort((a, b) => {
+      if (a.borders && b.borders) {
+        if (a.borders.length < b.borders.length) return 1;
+        else if (a.borders.length > b.borders.length) return -1;
+        else return 0;
+      } else {
+        return 0;
+      }
+    }),
+  );
+   countryListConfig = computed(() => this.secondComputed().filter((country) => country.name == this.config.defaultCountry ));
   addCountry(country: Country) {
     // spreads the array of country objects and update adds the country provided to this method as an argument
     // update doesnt mutate array it swaps it with an entirley new one.
     this.countries.update((list) => [...list, country]);
   }
-  removeCountry(name:string) {
-    this.countries.update((list) => list.filter(country => country.name !== name));
-    console.log("Country removed: " + name);
+  removeCountry(name: string) {
+    this.countries.update((list) => list.filter((country) => country.name !== name));
+    console.log('Country removed: ' + name);
   }
 }
