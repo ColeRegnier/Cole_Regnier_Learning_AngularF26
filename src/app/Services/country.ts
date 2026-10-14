@@ -2,7 +2,7 @@ import { computed, effect, inject, Injectable, Service, signal } from '@angular/
 import { ContentEvent } from '../Shared/Models/content-event';
 import { Country } from '../Shared/Models/country';
 import { COUNTRY_CONFIG } from '../Shared/country-config';
-@Service()
+
 @Injectable({ providedIn: 'root' })
 export class CountryService {
   private config = inject(COUNTRY_CONFIG);
