@@ -1,20 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {Brewery} from './Shared/Models/brewery';
 import {Country} from './Shared/Models/country';
 import { count } from 'rxjs';
 import { CountryList } from './Components/country-list/country-list';
+import {GuardService} from './Services/guard-service';
 
 const name = "Cole";
 const assignmentNum = "2";
 @Component({
-  imports: [RouterOutlet, CountryList],
+  imports: [RouterOutlet, CountryList, RouterLink, RouterLinkActive],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
 export class App {
-
+  // importing guard
+  protected guard = inject(GuardService);
   protected countryList: Country[] = [
     {
       name: 'Canada',
@@ -55,6 +57,4 @@ export class App {
     { name: 'South Korea', population: 51106229, independent: true, borders: ['North Korea'] },
     { name: 'French Polynesia', population: 2787861, independent: false },
   ];
-
-
 }

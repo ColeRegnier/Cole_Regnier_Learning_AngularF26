@@ -1,6 +1,7 @@
-<div class = "country-list" >
+<!-- route link for each list item element that finds it based on country.name -->
 
-<div>
+<div class = "country-list" >
+  <div>
 <h1>{{country().name}}</h1>
 <h2>{{country().population}}</h2>
 <!--checking if borders has a length if it doesnt then dont display borders (island nations)-->
@@ -17,7 +18,8 @@
   <div class = "removBtn">
 
       <button class = clickable (click) ="onClick()">Remove</button>
-
+    <!-- hacky loser suck way of making clickable button easy style instead of click events-->
+    <a [routerLink]="['/countries',country().name]"><button>Details</button> </a>
   </div>
 </div>
 @switch (country().independent){
@@ -27,3 +29,4 @@
 }
 
 </div>
+

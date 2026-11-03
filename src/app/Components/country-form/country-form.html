@@ -1,0 +1,34 @@
+<h2>{{ isEditMode() ? 'Edit Country' : 'Add Country'}}</h2>
+<form class = "country-form" [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+  <label>Country Name
+    <input type="text" formControlName="name">
+  </label>
+
+  @if (countryForm.controls.name.touched && countryForm.controls.name.invalid) {
+    <p>COUNTRY NAME IS REQUIRED</p>
+  }
+  <label>Population Number
+    <input type="number" formControlName="population">
+  </label>
+  <!-- if the form field is empty put form require else if its not below minumum amount diplay its below the minimum -->
+  @if (countryForm.controls.population.touched && countryForm.controls.population.hasError('required')) {
+    <p>POPULATION REQUIRED</p>
+  } @else if (countryForm.controls.population.touched && countryForm.controls.population.hasError('min')){
+    <p>Population must be atleast 500.</p>
+  }
+  <label >
+    Independent
+    <input type="checkbox" formControlName="independent">
+  </label>
+
+  <label>
+  Borders
+    <input formControlName="borders">
+    @if (countryForm.controls.name.touched && countryForm.controls.borders.touched && countryForm.hasError('validateBorderNotSelf')) {
+      <h3>A country cannot border itself idiot</h3>
+    }
+  </label>
+  <button type="submit" [disabled]="countryForm.invalid">
+    {{isEditMode() ? 'Save changes' : 'Add country'}}
+  </button>
+</form>

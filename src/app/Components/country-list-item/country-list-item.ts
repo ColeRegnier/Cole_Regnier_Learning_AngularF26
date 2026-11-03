@@ -1,30 +1,29 @@
 import { Component, input, output } from '@angular/core';
 import { Country} from '../../Shared/Models/country';
 import {ContentEvent} from '../../Shared/Models/content-event';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-country-list-item',
   styleUrl: './country-list-item.css',
   templateUrl: './country-list-item.html',
 })
 export class CountryListItem {
-
   // parent must pass country to this class
   country = input.required<Country>();
   ContentEvent = output<ContentEvent>();
 
-  onClick(){
+  onClick() {
     console.log('=== onClick event ===');
-    this.ContentEvent.emit({name :this.country().name, action : 'select'})
+    this.ContentEvent.emit({ name: this.country().name, action: 'select' });
   }
-  accept():void{
+  accept(): void {
     // emitting accepted independence of parent country
     this.ContentEvent.emit({ name: this.country().name, action: 'accept-independence' });
-
   }
-  deny():void{
+  deny(): void {
     // emitting denied independence of parent country
     this.ContentEvent.emit({ name: this.country().name, action: 'deny-independence' });
   }

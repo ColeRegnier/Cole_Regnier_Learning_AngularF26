@@ -73,7 +73,9 @@ export class CountryService {
       }
     }),
   );
-   countryListConfig = computed(() => this.secondComputed().filter((country) => country.name == this.config.defaultCountry ));
+  countryListConfig = computed(() =>
+    this.secondComputed().filter((country) => country.name == this.config.defaultCountry),
+  );
   addCountry(country: Country) {
     // spreads the array of country objects and update adds the country provided to this method as an argument
     // update doesnt mutate array it swaps it with an entirley new one.
@@ -83,4 +85,13 @@ export class CountryService {
     this.countries.update((list) => list.filter((country) => country.name !== name));
     console.log('Country removed: ' + name);
   }
+  // returns id with that name
+  getByName(name: string) {
+    return this.countries().find((c) => c.name === name);
+  }
+  updateCountry(oldName:string , country: Country) {
+
+    this.countries.update(countries => countries.map(c=>c.name === oldName ? country : c));
+  }
 }
+

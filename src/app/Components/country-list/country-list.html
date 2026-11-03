@@ -11,19 +11,11 @@
     }
 
   </div>
-  @for (country of countryListConfig(); track country.name){
-    <!--Passing parent property "country" into child country-list-item as [country] -->
-    <app-country-list-item [country]="country"
-                           (ContentEvent)="onContentEvent($event)">
 
-
-    </app-country-list-item>
-  }
   @for (country of countryList(); track country.name){
     <!--Passing parent property "country" into child country-list-item as [country] -->
     <app-country-list-item [country]="country"
     (ContentEvent)="onContentEvent($event)">
-
 
     </app-country-list-item>
   }
