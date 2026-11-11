@@ -5,6 +5,7 @@ import {Country} from './Shared/Models/country';
 import { count } from 'rxjs';
 import { CountryList } from './Components/country-list/country-list';
 import {GuardService} from './Services/guard-service';
+import { LoadingService } from './Services/loading';
 
 const name = "Cole";
 const assignmentNum = "2";
@@ -17,6 +18,10 @@ const assignmentNum = "2";
 export class App {
   // importing guard
   protected guard = inject(GuardService);
+
+  private loadingService = inject(LoadingService);
+  protected isLoading = this.loadingService.isLoading;
+
   protected countryList: Country[] = [
     {
       name: 'Canada',

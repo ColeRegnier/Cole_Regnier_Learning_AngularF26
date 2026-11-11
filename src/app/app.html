@@ -1,10 +1,14 @@
 
 <div class="container">
-  <button (click)="guard.toggle()">@if (guard.guardEnabled() === true) {
-    Unlock Editing
-  } @else {Lock Editing} </button>
-  <a routerLink="/add" routerLinkActive = "active"><button>Add Country</button></a>
-  <h3>Countries</h3>
+  @if (isLoading()) {
+    <p>Loading...</p>
+  } @else {
+    <button (click)="guard.toggle()">@if (guard.guardEnabled() === true) {
+      Unlock Editing
+    } @else {Lock Editing} </button>
+    <a routerLink="/add" routerLinkActive = "active"><button>Add Country</button></a>
+    <h3>Countries</h3>
+  }
 </div>
 <router-outlet />
 
