@@ -2,54 +2,44 @@ import { computed, effect, inject, Injectable, Service, signal } from '@angular/
 import { ContentEvent } from '../Shared/Models/content-event';
 import { Country } from '../Shared/Models/country';
 import { COUNTRY_CONFIG } from '../Shared/country-config';
+import { httpResource } from '@angular/common/http';
+import { CountryAPI } from '../Shared/Models/country-api';
 
 @Injectable({ providedIn: 'root' })
 export class CountryService {
   private config = inject(COUNTRY_CONFIG);
-  private countries = signal<Country[]>([
+  private countries = signal<Country[]>([]);
+  private countryResource = httpResource<Country[]>(
+    () => ({
+      url: `${this.config.apiBaseUrl}/countries/v5`,
+      params: {
+        limit: 100,
+        response_fields: 'names.common,population,classification.sovereign,borders',
+        'api-key': this.config.apiKey,
+      },
+    }),
     {
-      name: 'Canada',
-      population: 41417056,
-      independent: true,
-      borders: ['The United States of America', 'Denmark', 'France'],
+      defaultValue: [],
+      parse: (raw) =>
+        (raw as CountryAPI).data.objects.map((c) => ({
+          name: c.names.common,
+          population: c.population,
+          independent: c.classification.sovereign,
+          // borders are 3 letters any way to fix???
+          borders: c.borders,
+        })),
     },
-    {
-      name: 'Germany',
-      population: 83467117,
-      independent: true,
-      borders: [
-        'Czech Republic',
-        'Austria',
-        'Denmark',
-        'Poland',
-        'Switzerland',
-        'Belgium',
-        'France',
-        'Luxembourg',
-        'Netherlands',
-        'Sweden',
-        'United Kingdom',
-      ],
-    },
-    {
-      name: 'Mexico',
-      population: 134407258,
-      independent: true,
-      borders: ['The United States of America', 'Guatemala', 'Belize'],
-    },
-    {
-      name: 'Libya',
-      population: 7361263,
-      independent: true,
-      borders: ['Algeria', 'Chad', 'Egypt', 'Niger', 'Sudan', 'Tunisia'],
-    },
-    { name: 'South Korea', population: 51106229, independent: true, borders: ['North Korea'] },
-
-    { name: 'French Polynesia', population: 2787861, independent: false },
-  ]);
-
+  );
+  isLoading = this.countryResource.isLoading;
+  error = this.countryResource.error;
   // effect
   constructor() {
+    // effect for storing the country resource in the countries signal everytime its updated
+    effect(() => {
+      if (this.countryResource.hasValue()) {
+        this.countries.set(this.countryResource.value());
+      }
+    });
     console.log('CountryService constructor');
     effect(() => {
       console.log('===Total number of countries ' + this.countries().length + '===');
@@ -89,9 +79,7 @@ export class CountryService {
   getByName(name: string) {
     return this.countries().find((c) => c.name === name);
   }
-  updateCountry(oldName:string , country: Country) {
-
-    this.countries.update(countries => countries.map(c=>c.name === oldName ? country : c));
+  updateCountry(oldName: string, country: Country) {
+    this.countries.update((countries) => countries.map((c) => (c.name === oldName ? country : c)));
   }
 }
-

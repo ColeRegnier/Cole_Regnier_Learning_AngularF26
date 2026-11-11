@@ -1,5 +1,15 @@
-# Lab1Angular
+# Assignment 7 Angular 
 
+## REST Countries API 
+The docs are found at 
+```
+https://restcountries.com/docs
+```
+Example Request, you need your own api key.
+```
+https://api.restcountries.com/countries/v5?q=Canada&api-key=API-key-here
+```
+I chose to use httpResource because you said it was easier to use in class and I am cattle
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
 
 ## Development server

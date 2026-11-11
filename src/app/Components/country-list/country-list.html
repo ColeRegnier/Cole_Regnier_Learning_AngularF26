@@ -1,22 +1,31 @@
 <h1>List of Countries!</h1>
 <p>{{config.apiBaseUrl}}</p>
 <div class =  "container">
-  <div class="largestBorder">
+  @if (isLoading()) {
+    <p>loading countries</p>
+  } @else if (error()){
+    <p>Could not load countries </p>
+    <pre>{{error()}}</pre>
+  } @else{
 
-    @if (countriesSorted().length > 0) {
-      <h3>Country with most borders is :{{countriesSorted()[0].name}}</h3>
-      <h3>Number of bordering countries :{{countriesSorted()[0].borders?.length}}</h3>
+
+    <div class="largestBorder">
+
+      @if (countriesSorted().length > 0) {
+        <h3>Country with most borders is :{{countriesSorted()[0].name}}</h3>
+        <h3>Number of bordering countries :{{countriesSorted()[0].borders?.length}}</h3>
 
 
+      }
+
+    </div>
+
+    @for (country of countryList(); track country.name){
+      <!--Passing parent property "country" into child country-list-item as [country] -->
+      <app-country-list-item [country]="country"
+      (ContentEvent)="onContentEvent($event)">
+
+      </app-country-list-item>
     }
-
-  </div>
-
-  @for (country of countryList(); track country.name){
-    <!--Passing parent property "country" into child country-list-item as [country] -->
-    <app-country-list-item [country]="country"
-    (ContentEvent)="onContentEvent($event)">
-
-    </app-country-list-item>
   }
 </div>

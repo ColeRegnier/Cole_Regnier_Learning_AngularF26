@@ -5,11 +5,14 @@ import { COUNTRY_CONFIG } from './Shared/country-config';
 import { CountryList } from './Components/country-list/country-list';
 import { CountryService } from './Services/country';
 import { MockCountryService } from './Services/mock-country';
+import {API_KEY} from './Shared/secretKey';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes,withComponentInputBinding()),
+    provideRouter(routes, withComponentInputBinding()),
     // when you need to use mockCountryService just un comment it when you no longer need it just re comment the useClass portion of code
     /*
     {
@@ -19,7 +22,11 @@ export const appConfig: ApplicationConfig = {
   */
     {
       provide: COUNTRY_CONFIG,
-      useValue: { apiBaseUrl: 'https://placeholder.example.com/api', defaultCountry: 'Canada' },
+      useValue: {
+        apiBaseUrl: 'https://api.restcountries.com',
+        apiKey: API_KEY,
+        defaultCountry: 'Canada',
+      },
     },
   ],
 };

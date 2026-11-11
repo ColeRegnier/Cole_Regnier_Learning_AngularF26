@@ -14,6 +14,8 @@ export class CountryList {
   protected config = inject(COUNTRY_CONFIG);
   private countryService = inject(CountryService);
   protected countryList = this.countryService.countryList;
+  isLoading = this.countryService.isLoading;
+  error = this.countryService.error;
   protected countriesSorted = this.countryService.secondComputed;
   protected countryListConfig = this.countryService.countryListConfig;
   protected onContentEvent($event: ContentEvent) {
