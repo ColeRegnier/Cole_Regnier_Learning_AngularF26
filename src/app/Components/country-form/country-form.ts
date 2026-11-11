@@ -40,6 +40,7 @@ export function validateBorderNotSelf(control: AbstractControl): ValidationError
   // returning null
   return null;
 }
+
 @Component({
   imports: [ReactiveFormsModule],
   selector: 'app-country-form',
@@ -53,12 +54,18 @@ export class CountryForm {
   name = input<string>();
   // boolean t/f if this objs name isnt undefined
   protected isEditMode = computed(() => this.name() !== undefined);
+  private validateNameNotDupe= (control: AbstractControl) : ValidationErrors | null => {
+    let newName = (control.value || '').trim().toLowerCase();
+    let currentName =(this.name () || '').toLowerCase();
+    let taken = this.countryService.countryList().some(country => country.name.toLowerCase() === newName && country.name.toLowerCase() !== currentName);
+    return taken ? { name: taken } : null;
+  }
   // building a country object based off the service
   protected countryForm = this.formbuilder.nonNullable.group(
     {
       // shortest country name has 4 letters
       // ask matt why the form fields are arrays
-      name: ['', [Validators.required, Validators.minLength(4), validateNotBlank]],
+      name: ['', [Validators.required, Validators.minLength(4), validateNotBlank,this.validateNameNotDupe]],
       // smallest population is the vatican so min is 500
       population: [0, [Validators.required, Validators.min(500)]],
       //minimum population

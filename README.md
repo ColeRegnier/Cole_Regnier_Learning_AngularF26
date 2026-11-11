@@ -10,6 +10,9 @@ Example Request, you need your own api key.
 https://api.restcountries.com/countries/v5?q=Canada&api-key=API-key-here
 ```
 I chose to use httpResource because you said it was easier to use in class and I am cattle
+
+the reason why the items get un deleted on refresh is because angular is reloading the api and refilling the countryList based on because everything is being reloaded.
+Because the changes are stored locally they donot survive the reload. 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
 
 ## Development server
