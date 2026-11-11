@@ -6,6 +6,7 @@ import { count } from 'rxjs';
 import { CountryList } from './Components/country-list/country-list';
 import {GuardService} from './Services/guard-service';
 import { LoadingService } from './Services/loading';
+import { ErrorService } from './Services/error';
 
 const name = "Cole";
 const assignmentNum = "2";
@@ -62,4 +63,5 @@ export class App {
     { name: 'South Korea', population: 51106229, independent: true, borders: ['North Korea'] },
     { name: 'French Polynesia', population: 2787861, independent: false },
   ];
+  protected readonly errorService = inject(ErrorService);
 }

@@ -1,4 +1,9 @@
-
+@if(errorService.errorMessage()){
+  <div class="error">
+    <p>Its so over: ${{errorService.errorMessage()}}</p>
+    <button (click)="errorService.clearError()">Dismiss</button>
+  </div>
+}
 <div class="container">
   @if (isLoading()) {
     <p>Loading...</p>
@@ -10,5 +15,7 @@
     <h3>Countries</h3>
   }
 </div>
+
+
 <router-outlet />
 
