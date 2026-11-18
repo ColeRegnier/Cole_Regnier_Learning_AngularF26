@@ -11,9 +11,31 @@ https://api.restcountries.com/countries/v5?q=Canada&api-key=API-key-here
 ```
 I chose to use httpResource because you said it was easier to use in class and I am cattle
 
+
+
 the reason why the items get un deleted on refresh is because angular is reloading the api and refilling the countryList based on because everything is being reloaded.
 Because the changes are stored locally they donot survive the reload. 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+
+
+Lazy Loading
+
+main-YTTI5MVO.js    | main          | 342.38 kB |                91.13 kB
+styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+Initial chunk files | Names          |  Raw size | Estimated transfer size
+chunk-2ABCUGIZ.js   | -              | 199.09 kB |                58.49 kB
+chunk-WG4LNMUC.js   | -              |  91.15 kB |                23.15 kB
+main-QABG4HGL.js    | main           |   9.21 kB |                 2.76 kB
+styles-5INURTSO.css | styles         |   0 bytes |                 0 bytes
+
+                    | Initial total  | 299.44 kB |                84.41 kB
+
+Lazy chunk files    | Names          |  Raw size | Estimated transfer size
+chunk-56FAR77U.js   | country-form   |  43.92 kB |                 9.87 kB
+chunk-FXPOSGQ2.js   | country-detail |   1.60 kB |               711 bytes
+
+what changed was that we implemented lazy loading and in lazy loading the content in broken down into chunks that are loaded as needed not all at once with the exception of the main page .
 
 ## Development server
 

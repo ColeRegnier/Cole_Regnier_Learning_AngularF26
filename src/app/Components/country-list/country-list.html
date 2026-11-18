@@ -18,10 +18,7 @@
         Also this counts as the built in pipe param
         also this will allways be the the border array length / 100 the country list is 100 long, lol.
         -->
-        {{countriesSorted().length}}
-        {{countriesSorted()[0].borders}}
-        {{countriesSorted()[0].borders?.length}}
-        <h3>That is {{(( countriesSorted()[0].borders?.length ?? 0) / countriesSorted().length) | percent : '1.1-1' : 'en-CA'}}</h3>
+        <h3>That is {{(( countriesSorted()[0].borders?.length ?? 0) / countriesSorted().length) | percent : '1.1-1' : 'en-CA'}} of the total list</h3>
 
       }
 
