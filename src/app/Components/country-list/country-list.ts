@@ -4,8 +4,9 @@ import { CountryListItem } from '../country-list-item/country-list-item';
 import {ContentEvent} from '../../Shared/Models/content-event';
 import { CountryService} from '../../Services/country';
 import { COUNTRY_CONFIG } from '../../Shared/country-config';
+import { PercentPipe, TitleCasePipe } from '@angular/common';
 @Component({
-  imports: [CountryListItem],
+  imports: [CountryListItem, PercentPipe],
   selector: 'app-country-list',
   styleUrl: './country-list.css',
   templateUrl: './country-list.html',

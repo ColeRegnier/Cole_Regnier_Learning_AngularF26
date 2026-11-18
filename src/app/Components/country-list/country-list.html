@@ -14,7 +14,14 @@
       @if (countriesSorted().length > 0) {
         <h3>Country with most borders is :{{countriesSorted()[0].name}}</h3>
         <h3>Number of bordering countries :{{countriesSorted()[0].borders?.length}}</h3>
-
+        <!--New thing for percent pipe. nullish coalesciong since its throwing errors at division
+        Also this counts as the built in pipe param
+        also this will allways be the the border array length / 100 the country list is 100 long, lol.
+        -->
+        {{countriesSorted().length}}
+        {{countriesSorted()[0].borders}}
+        {{countriesSorted()[0].borders?.length}}
+        <h3>That is {{(( countriesSorted()[0].borders?.length ?? 0) / countriesSorted().length) | percent : '1.1-1' : 'en-CA'}}</h3>
 
       }
 

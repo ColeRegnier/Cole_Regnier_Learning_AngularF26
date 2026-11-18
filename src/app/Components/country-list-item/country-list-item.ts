@@ -2,10 +2,11 @@ import { Component, input, output } from '@angular/core';
 import { Country} from '../../Shared/Models/country';
 import {ContentEvent} from '../../Shared/Models/content-event';
 import { RouterLink } from '@angular/router';
+import { TitleCasePipe, UpperCasePipe } from '@angular/common';
 
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, TitleCasePipe, UpperCasePipe ],
   selector: 'app-country-list-item',
   styleUrl: './country-list-item.css',
   templateUrl: './country-list-item.html',
