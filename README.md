@@ -37,6 +37,13 @@ chunk-FXPOSGQ2.js   | country-detail |   1.60 kB |               711 bytes
 
 what changed was that we implemented lazy loading and in lazy loading the content in broken down into chunks that are loaded as needed not all at once with the exception of the main page .
 
+Lifecycle 
+I dont have a constructor in my details component but if i did it would throw errors because "the house is still being built" so you cant retrieve the id because there is none yet
+the on destroy ran when going back to homepage so I assume that router destroys the component page when you leave it. 
+
+
+
+
 ## Development server
 
 To start a local development server, run:
