@@ -1,8 +1,8 @@
 @if (country(); as c) {
   <h1>{{c.name}}</h1>
-  <h2>Population: {{c.population}}</h2>
+  <h2>Population: {{c.population | populationPipe : "short" :2}}</h2>
   <h2>Borders: {{c.borders}}</h2>
-  <h2>Independent? {{c.independent}}</h2>
+  <h2>Independent? {{c.independent | independentPipe}}</h2>
   <a [routerLink]="['/edit', c.name]"><button>Edit</button></a>
 }
 
