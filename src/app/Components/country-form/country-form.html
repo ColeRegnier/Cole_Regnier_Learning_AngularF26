@@ -1,14 +1,14 @@
 <h2>{{ isEditMode() ? 'Edit Country' : 'Add Country'}}</h2>
 <form class = "country-form" [formGroup]="countryForm" (ngSubmit)="onSubmit()">
   <label>Country Name
-    <input type="text" formControlName="name">
+    <input type="text" formControlName="name" #firstField>
   </label>
 
   @if (countryForm.controls.name.touched && countryForm.controls.name.invalid) {
     <p>COUNTRY NAME IS REQUIRED</p>
   }
   <label>Population Number
-    <input type="number" formControlName="population">
+    <input type="number" formControlName="population" >
   </label>
   <!-- if the form field is empty put form require else if its not below minumum amount diplay its below the minimum -->
   @if (countryForm.controls.population.touched && countryForm.controls.population.hasError('required')) {

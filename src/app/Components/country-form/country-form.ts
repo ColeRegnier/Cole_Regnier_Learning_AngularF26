@@ -1,4 +1,13 @@
-import { Component, computed, effect, inject, input } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  viewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -50,22 +59,30 @@ export function validateBorderNotSelf(control: AbstractControl): ValidationError
 export class CountryForm {
   private formbuilder = inject(FormBuilder);
   private countryService = inject(CountryService);
-
+  private firstField = viewChild<ElementRef>('firstField');
   name = input<string>();
   // boolean t/f if this objs name isnt undefined
   protected isEditMode = computed(() => this.name() !== undefined);
-  private validateNameNotDupe= (control: AbstractControl) : ValidationErrors | null => {
+  private validateNameNotDupe = (control: AbstractControl): ValidationErrors | null => {
     let newName = (control.value || '').trim().toLowerCase();
-    let currentName =(this.name () || '').toLowerCase();
-    let taken = this.countryService.countryList().some(country => country.name.toLowerCase() === newName && country.name.toLowerCase() !== currentName);
+    let currentName = (this.name() || '').toLowerCase();
+    let taken = this.countryService
+      .countryList()
+      .some(
+        (country) =>
+          country.name.toLowerCase() === newName && country.name.toLowerCase() !== currentName,
+      );
     return taken ? { name: taken } : null;
-  }
+  };
   // building a country object based off the service
   protected countryForm = this.formbuilder.nonNullable.group(
     {
       // shortest country name has 4 letters
       // ask matt why the form fields are arrays
-      name: ['', [Validators.required, Validators.minLength(4), validateNotBlank,this.validateNameNotDupe]],
+      name: [
+        '',
+        [Validators.required, Validators.minLength(4), validateNotBlank, this.validateNameNotDupe],
+      ],
       // smallest population is the vatican so min is 500
       population: [0, [Validators.required, Validators.min(500)]],
       //minimum population
@@ -96,10 +113,13 @@ export class CountryForm {
         });
       }
     });
+    //we yse afterNextRender to call focus() because constructor builds the logic of the component but the html template hasnt been made or rendered yet. In this case the the next render would be the first render. if it were on
+    // onInit it would run before the html was created and couldnt access the html elements because of that.
+    afterNextRender(()=>{ this.firstField()?.nativeElement.focus();});
   }
 
   protected onSubmit() {
-    console.log("form submitted");
+    console.log('form submitted');
     if (this.countryForm.invalid) {
       return;
     }
@@ -109,12 +129,12 @@ export class CountryForm {
       population: formValue.population,
       independent: formValue.independent,
       // because borders is a string array and formValue is just a string we have to split it on ','
-      borders: formValue.borders.split(',').map(border=>border.trim()),
+      borders: formValue.borders.split(',').map((border) => border.trim()),
     };
-    if (this.isEditMode()){
+    if (this.isEditMode()) {
       console.log('country updated');
-      this.countryService.updateCountry(this.name()!,country);
-    }else {
+      this.countryService.updateCountry(this.name()!, country);
+    } else {
       this.countryService.addCountry(country);
     }
   }
